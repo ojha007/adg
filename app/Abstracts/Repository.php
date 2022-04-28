@@ -91,16 +91,8 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
-     * @return mixed
-     */
-    public function getModel()
-    {
-        return $this->model;
-    }
-
-    /**
      * @param int $id
-     ¶* @return mixed
+     * ¶* @return mixed
      */
     public function find(int $id)
     {
@@ -162,5 +154,24 @@ abstract class Repository implements RepositoryInterface
     public function getByIdWith($id, ...$with)
     {
         return $this->model->with($with)->findOrFail($id);
+    }
+
+    /**
+     * @param string $slug
+     * @return mixed
+     */
+    public function findBySlug(string $slug)
+    {
+        return $this->getModel()
+            ->where('slug', $slug)
+            ->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModel()
+    {
+        return $this->model;
     }
 }

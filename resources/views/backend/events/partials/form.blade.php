@@ -1,7 +1,4 @@
-@push('styles')
-    <link rel="stylesheet"
-          href="{{asset('backend/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-@endpush
+
 <div class="col-md-6 form-group @error('title') has-error @enderror">
     {!! Form::label('Title') !!}
     {!! Form::text('title',null,['class'=>'form-control','placeholder'=>'---ENTER EVENT TITLE----','required'=>'true']) !!}

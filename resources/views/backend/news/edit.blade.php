@@ -19,6 +19,15 @@
             </h3>
         </div>
         <div class="box-body"></div>
-        <div class="box-footer"></div>
+        <div class="box-footer">
+            <button type="reset" class="btn btn-flat btn-danger pull-left">
+                <i class="fa fa-close"></i>
+                RESET
+            </button>
+            <button class="btn btn-flat btn-success pull-right" type="submit">
+                <i class="fa fa-save"></i>
+                UPDATE
+            </button>
+        </div>
     </div>
 @endsection

@@ -16812,9 +16812,9 @@ p, .p {
 .img-landscape-wide {
     height: 0;
     overflow: hidden;
-    padding-top: 19.04762%;
+    padding-top: 42.85714%;
     background: white;
-    position: relative
+    position: relative;
 }
 
 .img-landscape-wide img, .img-landscape-wide video, .img-landscape-wide iframe, .img-landscape-wide svg {

@@ -86,35 +86,32 @@
                                         alt="AMERICAN DIVERSITY GROUP"></div>
         <div class="container">
             <div class="flex-center-between mbottom-32"><h3 class="mr-4">Latest News</h3><a
-                    class="btn btn-outline-primary btn-sm" href="#">View All</a></div>
+                    class="btn btn-outline-primary btn-sm" href="{{route('news.index')}}">View All</a></div>
             <div class="row">
-                <div class="col-md-4 mbottom-32 media-detail">
-                    <div class="d-flex flex-column h-100">
-                        <div class="img-landscape"><img src="assets/images/about-1.jpg" alt=""></div>
-                        <h6 class="clamp__1 mt-2">Enhance Services</h6><small class="clamp__1 mt-1 text-gray-40">Jan 3,
-                            2022</small>
-                        <p class="clamp__3 mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit,
-                            ducimus.</p><a class="text-primary small mt-2 align-center" href="#">Read More <i
-                                class="ic-arrow-right ml-2"></i></a></div>
-                </div>
-                <div class="col-md-4 mbottom-32 media-detail">
-                    <div class="d-flex flex-column h-100">
-                        <div class="img-landscape"><img src="assets/images/about-2.jpg" alt=""></div>
-                        <h6 class="clamp__1 mt-2">Empower Communities</h6><small class="clamp__1 mt-1 text-gray-40">Jan
-                            3, 2022</small>
-                        <p class="clamp__3 mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit,
-                            ducimus.</p><a class="text-primary small mt-2 align-center" href="#">Read More <i
-                                class="ic-arrow-right ml-2"></i></a></div>
-                </div>
-                <div class="col-md-4 mbottom-32 media-detail">
-                    <div class="d-flex flex-column h-100">
-                        <div class="img-landscape"><img src="assets/images/about-3.jpg" alt=""></div>
-                        <h6 class="clamp__1 mt-2">Enrich Culture</h6><small class="clamp__1 mt-1 text-gray-40">Jan 3,
-                            2022</small>
-                        <p class="clamp__3 mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit,
-                            ducimus.</p><a class="text-primary small mt-2 align-center" href="#">Read More <i
-                                class="ic-arrow-right ml-2"></i></a></div>
-                </div>
+                @foreach($allNews as $news)
+                    <div class="col-md-4 mbottom-32 media-detail">
+                        <div class="d-flex flex-column h-100">
+                            <div class="img-landscape">
+                                @if($news->image)
+                                    <img src="{{asset($news->image)}}" alt="{{$news->title}}">
+                                @elseif($news->external_link)
+                                    <iframe width="420" height="315"
+                                            src="{{$news->external_link}}">
+                                    </iframe>
+                                @else
+                                @endif
+                            </div>
+                            <h6 class="clamp__1 mt-2">{{$news->title}}</h6>
+                            <small
+                                class="clamp__1 mt-1 text-gray-40">{{\Carbon\Carbon::parse($news->created_at)->format('M d, y')}}
+                            </small>
+{{--                            <p class="clamp__3 mt-1">{!! substr($news->description,0,100) !!}</p>--}}
+                            <a class="text-primary small mt-2 align-center" href="{{route('news.show',$news->slug)}}">Read
+                                More
+                                <i class="ic-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -155,9 +152,10 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group"><label
-                                        for="exampleFormControlTextarea1">Message</label><textarea class="form-control"
-                                                                                                   id="exampleFormControlTextarea1"
-                                                                                                   rows="8"></textarea>
+                                        for="exampleFormControlTextarea1">Message</label>
+                                    <textarea class="form-control"
+                                              id="exampleFormControlTextarea1"
+                                              rows="8"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +164,7 @@
                 </div>
                 <div class="col-lg-5 offset-lg-1 col-md-6">
                     <div class="img-portrait">
-                        <img src="{{asset('frontend/images/hero-banner.jpg')}}"
+                        <img src="{{asset('frontend/images/contact.webp')}}"
                              alt="AMERICAN DIVERSITY GROUP"></div>
                 </div>
             </div>

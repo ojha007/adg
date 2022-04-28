@@ -22,7 +22,7 @@ class DashboardController extends Controller
      *
      * @return Renderable
      */
-    public function dashboard(): Renderable
+    public function index(): Renderable
     {
         return view('backend.home');
     }

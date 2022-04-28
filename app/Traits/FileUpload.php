@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 trait FileUpload
 {
 
-    public function uploadFile($file, $dir): string
+    public function uploadFile($file, $dir): ?string
     {
         if ($file) {
             $path = 'images/' . $dir . '/' . Str::uuid() . time() . '.' . $file->getClientOriginalExtension();
@@ -17,6 +17,6 @@ trait FileUpload
             Storage::disk('public')->put($path, $resource);
             return Storage::url($path);
         }
-        return '';
+        return null;
     }
 }

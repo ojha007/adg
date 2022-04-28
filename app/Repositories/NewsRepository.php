@@ -12,4 +12,14 @@ class NewsRepository extends Repository
     {
         $this->model = $model;
     }
+
+    public function other3News($slug)
+    {
+        return $this->getModel()
+            ->where('slug', '!=',$slug)
+            ->orderByDesc('created_at')
+            ->limit(3)
+            ->get();
+
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,7 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        factory('/')
-//         $this->call(UsersTableSeeder::class);
+        User::updateOrCreate([
+            'email' => 'amdivgroup@gmail.com'
+        ], [
+            'password' => Hash::make('admin@321'),
+            'name' => 'American Diversity Group'
+        ]);
     }
 }

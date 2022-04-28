@@ -10,58 +10,19 @@
         </div>
         <div class="container">
             <div class="row flex-center">
-                <div class="col-lg-8 col-md-10 mb-4"><h4 class="mb-2">Montgomery county MD, bringing COVID-19
-                        vaccinations/boosters to its diverse community.</h4><small
-                        class="clamp__1 mt-1 text-gray-40 mb-3">Jan 3, 2022</small>
+                <div class="col-lg-8 col-md-10 mb-4"><h4 class="mb-2">{!! $news->title !!}</h4><small
+                        class="clamp__1 mt-1 text-gray-40 mb-3">{{\Carbon\Carbon::parse($news->created_at)->format('M d, Y')}}</small>
                     <div class="img-landscape-wide mb-2">
-                        <img src="{{asset('frontend/images/about-1.jpg')}}" alt="">
+                        @if($news->image)
+                            <img src="{{asset($news->image)}}" alt="{{$news->title}}">
+                        @elseif($news->external_link)
+                            <iframe width="420" height="315"
+                                    src="{{$news->external_link}}">
+                            </iframe>
+                        @else
+                        @endif
                     </div>
-                    <div class="textbox"><p>Ultricies et ornare fusce vivamus odio elit sit massa. Adipiscing
-                            parturient
-                            rhoncus vitae diam. Purus facilisi condimentum in viverra vitae quisque justo. Nisl
-                            egestas
-                            egestas a sed tincidunt dolor auctor ante <a href="#">pretium</a>. At aliquet augue
-                            vitae
-                            sed eu. Nisi vitae nisi at felis sit eget. Sed phasellus nunc ac volutpat. Vivamus
-                            mattis
-                            tempor nisl id ut. Duis ultrices quis ut cras lorem sed cursus eu sit. Vivamus sodales
-                            diam<a href="#">facilisis</a> est.</p>
-                        <p>Ultricies et ornare fusce vivamus odio elit sit massa. Adipiscing parturient rhoncus
-                            vitae
-                            diam. Purus facilisi condimentum in viverra vitae quisque justo. Nisl egestas egestas a
-                            sed
-                            tincidunt dolor auctor ante pretium. At aliquet augue vitae sed eu. Nisi vitae nisi at
-                            felis
-                            sit eget. Sed phasellus nunc ac volutpat. Vivamus mattis tempor nisl id ut. Duis
-                            ultrices
-                            quis ut cras lorem sed cursus eu sit. <a href="#">Vivamus</a> sodales diam facilisis
-                            est.Ultricies et ornare fusce vivamus odio elit sit massa. Adipiscing parturient rhoncus
-                            vitae diam.</p><h6>Nisi vitae</h6>
-                        <p>Nisi vitae nisi at felis sit eget. Sed phasellus nunc ac volutpat. Vivamus mattis tempor
-                            nisl
-                            id ut. Duis ultrices quis ut cras lorem sed cursus eu sit. Vivamus sodales diam
-                            facilisis
-                            est.Ultricies et ornare fusce vivamus odio elit sit massa. Adipiscing parturient rhoncus
-                            vitae diam.</p>
-                        <ul>
-                            <li>Initial Public Offerings of Shares and Bonds</li>
-                            <li>Rights Issue of Shares</li>
-                            <li>Further Public Offerings of Shares</li>
-                            <li>Private Placement</li>
-                        </ul>
-                        <h6>Curiculum vitae</h6>
-                        <p>Nisi vitae nisi at felis sit eget. Sed phasellus nunc ac volutpat. Vivamus mattis tempor
-                            nisl
-                            id ut. Duis ultrices quis ut cras lorem sed cursus eu sit. Vivamus sodales diam
-                            facilisis
-                            est.Ultricies et ornare fusce vivamus odio elit sit massa. Adipiscing parturient rhoncus
-                            vitae diam. Vivamus mattis tempor nisl id ut. Duis ultrices quis ut cras lorem sed
-                            cursus eu
-                            sit. Vivamus sodales diam facilisis est.Ultricies et ornare fusce vivamus odio elit sit
-                            massa. Adipiscing parturient rhoncus vitae diam.</p>
-                        <p>Nisi vitae nisi at felis sit eget. Sed phasellus nunc ac volutpat. Vivamus mattis tempor
-                            nisl
-                            id ut. Duis ultrices quis ut cras lorem sed cursus eu sit. Vivamus.</p></div>
+                    <div class="textbox pt-md-3">{!! $news->description !!}</div>
                 </div>
                 <div class="col-md-1">
                     <div class="sticky-side-component">
@@ -75,22 +36,30 @@
         </div>
         <div class="container mt-5"><h4 class="text-primary mb-4">Other News</h4>
             <div class="row">
-                @for($i=0;$i <3 ;$i++)
+                @foreach($otherNews as $news)
                     <div class="col-md-4 mbottom-32 media-detail">
                         <div class="d-flex flex-column h-100">
                             <div class="img-landscape">
-                                <img src="{{asset('frontend/images/about-1.jpg')}}" alt=""></div>
-                            <h6 class="clamp__1 mt-2">Enhance Services</h6>
-                            <small class="clamp__1 mt-1 text-gray-40">Jan
-                                3,
-                                2022</small>
-                            <p class="clamp__3 mt-1">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, ducimus.</p>
-                            <a class="text-primary small mt-2 align-center" href="{{route('news.show','slug')}}">Read
-                                More <i class="ic-arrow-right ml-2"></i></a></div>
+                                @if($news->image)
+                                    <img src="{{asset($news->image)}}" alt="{{$news->title}}">
+                                @elseif($news->external_link)
+                                    <iframe width="420" height="315"
+                                            src="{{$news->external_link}}">
+                                    </iframe>
+                                @else
+                                @endif
+                            </div>
+                            <h6 class="clamp__1 mt-2">{{$news->title}}</h6>
+                            <small
+                                class="clamp__1 mt-1 text-gray-40">{{\Carbon\Carbon::parse($news->created_at)->format('M d, y')}}
+                            </small>
+                            <a class="text-primary small mt-2 align-center"
+                               href="{{route('news.show',$news->slug)}}">
+                                Read More
+                                <i class="ic-arrow-right ml-2"></i></a>
+                        </div>
                     </div>
-                @endfor
-
+                @endforeach
             </div>
         </div>
     </section>
