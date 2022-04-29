@@ -20,7 +20,8 @@ class NewsController extends Controller
 
     public function index()
     {
-        return view($this->viewPath . 'index');
+        $allNews = $this->repository->paginate(6);
+        return view($this->viewPath . 'index',compact('allNews'));
     }
 
     public function show($slug)

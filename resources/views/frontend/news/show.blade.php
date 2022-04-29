@@ -47,11 +47,12 @@
                                             src="{{$news->external_link}}">
                                     </iframe>
                                 @else
+                                    <img src="">
                                 @endif
                             </div>
                             <h6 class="clamp__1 mt-2">{{$news->title}}</h6>
-                            <small
-                                class="clamp__1 mt-1 text-gray-40">{{\Carbon\Carbon::parse($news->created_at)->format('M d, y')}}
+                            <small class="clamp__1 mt-1 text-gray-40">
+                                {{\Carbon\Carbon::parse($news->created_at)->format('M d, y')}}
                             </small>
                             <a class="text-primary small mt-2 align-center"
                                href="{{route('news.show',$news->slug)}}">

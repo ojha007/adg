@@ -20,26 +20,31 @@
             </div>
             <div class="container">
                 <div class="row">
-                    @for($i=0;$i<6;$i++)
+                    @foreach($allNews as $news)
                         <div class="col-md-4 mbottom-32 media-detail">
                             <div class="d-flex flex-column h-100">
                                 <div class="img-landscape">
-                                    <a href="{{route('news.show','slug')}}">
-                                        <img src="{{asset('frontend/images/about-1.jpg')}}" alt="">
-                                    </a>
+                                    @if($news->image)
+                                        <img src="{{asset($news->image)}}" alt="{{$news->title}}">
+                                    @elseif($news->external_link)
+                                        <iframe width="420" height="315"
+                                                src="{{$news->external_link}}">
+                                        </iframe>
+                                    @else
+                                        <img src="">
+                                    @endif
                                 </div>
-                                <h6 class="clamp__1 mt-2">Enhance Services</h6><small
-                                    class="clamp__1 mt-1 text-gray-40">Jan
-                                    3,
-                                    2022</small>
-                                <p class="clamp__3 mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit,
-                                    ducimus.</p>
+                                <h6 class="clamp__1 mt-2">{{$news->title}}</h6>
+                                <small class="clamp__1 mt-1 text-gray-40">
+                                    {{\Carbon\Carbon::parse($news->created_at)->format('M d, y')}}
+                                </small>
+{{--                                <p class="clamp__3 mt-1">{!! substr($news->description) !!}</p>--}}
                                 <a class="text-primary small mt-2 align-center"
                                    href="{{route('news.show','slug')}}">Read
                                     More <i class="ic-arrow-right ml-2"></i></a>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
                 <div class="flex-center">
                     <button class="btn btn-outline-primary">Load More</button>

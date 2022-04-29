@@ -16,12 +16,12 @@
         </div>
         <div class="container">
             <div class="row">
-                @for($i =0 ;$i<6 ;$i++)
+                @foreach($events as $event)
                     <div class="col-md-4 col-sm-6 mb-4">
                         <div class="card card-01 h-100">
                             <div class="img-landscape"><img src="{{asset('frontend/images/about-1.jpg')}}" alt=""></div>
-                            <div class="p-3 flex-grow-1 d-flex flex-column"><h5 class="title text-light-400">Covid
-                                    Vaccine</h5>
+                            <div class="p-3 flex-grow-1 d-flex flex-column">
+                                ¶<h5 class="title text-light-400">{{$event->title}}</h5>
                                 <p class="mt-2 flex-grow-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Odit,
                                     ducimus.</p>
@@ -33,8 +33,7 @@
                             </div>
                         </div>
                     </div>
-                @endfor
-
+                @endforeach
             </div>
             <div class="flex-center">
                 <button class="btn btn-outline-primary">Load More</button>
